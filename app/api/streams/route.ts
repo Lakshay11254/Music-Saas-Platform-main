@@ -39,4 +39,17 @@ export async function POST(req: NextRequest) {
         console.log(error);
         return new Response("Error");
     }
+
+}
+
+export async function GET(req: NextRequest) {
+    const creatorId = req.nextUrl.searchParams.get("creatorId");
+    const streams = await prismaClient.streams.findMany({
+            where: {
+                userId: creatorId ?? "",
+            },
+    });
+
+return NextResponse.json({streams});
+
 }
