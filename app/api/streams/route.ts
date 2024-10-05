@@ -1,5 +1,8 @@
-import { NextRequest } from "next/server";
-import {z} from "zod";
+import { NextRequest, NextResponse } from "next/server";
+import { z } from "zod";
+import { prismaClient } from "../lib/db";
+import { url } from "inspector";
+const YT_REGEX = new RegExp("https:\/\/www\.youtube\.com\/watch\?v=[a-zA-Z0-9_-]+")
 
 const createStreamSchema = z.object({
     creatorId: z.string(),
@@ -14,11 +17,26 @@ export async function POST(req: NextRequest) {
 
     try {
         const data = createStreamSchema.parse(await req.json());
+        const isYt = YT_REGEX.test(data.url);
+        if (!isYt) {
+            return NextResponse.json({
+                mssgae: "Wrong URL",
+                status: 411,
+            })
+        }
+        const extractId = data.url.split("?v=")[1];
+        prismaClient.stream.create({
+            data: {
+                userId: data.creatorId,
+                url: data.url,
+                extractedId: extractId,
+                type: "Yootube",
+            }
+        })
         console.log(data);
         return new Response("Hello World");
-      } catch (error) {
+    } catch (error) {
         console.log(error);
         return new Response("Error");
-      }
+    }
 }
- 
