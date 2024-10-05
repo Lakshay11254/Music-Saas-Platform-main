@@ -25,14 +25,14 @@ export async function POST(req: NextRequest) {
             })
         }
         const extractId = data.url.split("?v=")[1];
-        prismaClient.stream.create({
+       await prismaClient.stream.create({
             data: {
                 userId: data.creatorId,
                 url: data.url,
                 extractedId: extractId,
-                type: "Yootube",
+                type: "Youtube",
             }
-        })
+        });
         console.log(data);
         return new Response("Hello World");
     } catch (error) {
