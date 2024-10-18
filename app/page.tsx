@@ -1,20 +1,11 @@
-// import Appbar from "./component/Appbar";
-
-// export default function Home() {
-//   return (
-//     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-//     <Appbar/>
-//     </div>
-//   );
-// }
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Button } from "./components/ui/button";
+import { Input } from "./components/ui/input";
 //@ts-ignore
 import { Users, Radio, Headphones } from "lucide-react";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import { authOptions } from "@/lib/auth-options";
+import { authOptions } from "./lib/auth-options";
 import { Appbar } from "./components/Appbar";
 
 export default async function LandingPage() {
