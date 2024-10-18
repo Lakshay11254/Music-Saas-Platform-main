@@ -1,5 +1,5 @@
-import { authOptions } from "@/lib/auth-options";
-import db from "@/lib/db";
+import { authOptions } from "@/app/lib/auth-options"; 
+import db from "./../../lib/db";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
 
   try {
     const data = UpvoteSchema.parse(await req.json());
-    await db.upvote.create({
+    await db .upvote.create({
       data: {
         userId: user.id,
         streamId: data.streamId,
