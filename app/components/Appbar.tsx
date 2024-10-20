@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> 5d73f222356b0c62726fee6b03e156ef3e5fb527
 "use client";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Button } from "../components/ui/button";
