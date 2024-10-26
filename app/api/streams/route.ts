@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import { prismaClient } from "../lib/db";
+import { prismaClient } from "../../lib/db";
 import { url } from "inspector";
 const YT_REGEX = new RegExp("https:\/\/www\.youtube\.com\/watch\?v=[a-zA-Z0-9_-]+")
 
@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
 
 export async function GET(req: NextRequest) {
     const creatorId = req.nextUrl.searchParams.get("creatorId");
-    const streams = await prismaClient.streams.findMany({
+    const streams = await PrismaClient.streams.findMany({
             where: {
                 userId: creatorId ?? "",
             },
